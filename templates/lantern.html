@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lantern of Truth</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+
+<div class="lantern-stage">
+
+    <div class="lantern-aura"></div>
+
+    <div class="lantern-core" onclick="revealLantern()">
+        🏮
+    </div>
+
+    <div id="rewardPanel" class="reward-panel">
+        <h2 id="rankTitle"></h2>
+        <div class="points-display">
+            <span id="pointsCounter">0</span>
+            <span class="pts">PTS</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function revealLantern() {
+    const data = JSON.parse(localStorage.getItem("result"));
+    if (!data) return;
+
+    document.querySelector(".lantern-aura").classList.add("active");
+    document.getElementById("rewardPanel").classList.add("show");
+
+    const rankTitle = document.getElementById("rankTitle");
+
+    if(data.rank === 1){
+        rankTitle.innerHTML = "👑 FIRST PLACE";
+        document.body.classList.add("rank1");
+    } else if(data.rank === 2){
+        rankTitle.innerHTML = "🥈 SECOND PLACE";
+        document.body.classList.add("rank2");
+    } else {
+        rankTitle.innerHTML = "🥉 THIRD PLACE";
+        document.body.classList.add("rank3");
+    }
+
+    animatePoints(data.points);
+}
+
+function animatePoints(target){
+    let count = 0;
+    const counter = document.getElementById("pointsCounter");
+    const interval = setInterval(()=>{
+        count++;
+        counter.innerText = count;
+        if(count >= target){
+            clearInterval(interval);
+        }
+    }, 30);
+}
+</script>
+
+</body>
+
+
+
+</body>
+</html>

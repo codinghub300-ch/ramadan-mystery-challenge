@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CodingHub Ramadan Mystery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<div class="particles"></div>
+<body class="dark">
+
+    <div id="introLoader">
+  <div class="loader-content">
+    <h1>CodingHub</h1>
+    <p>Ramadan Mystery Challenge</p>
+    <div class="loader-bar">
+      <div class="loader-progress"></div>
+    </div>
+  </div>
+</div>
+
+
+<main class="container">
+<div class="ctf-box">
+
+    <div class="ctf-header">
+        <span>Challenge: Lantern_Gate</span>
+        <span class="difficulty">Difficulty: Hard</span>
+        <span class="points">Max Points: 60</span>
+    </div>
+
+    <div class="terminal">
+        
+        
+        <p>>Enter The Key:</p>
+    </div>
+
+    <input type="text" id="keyInput" placeholder="Key{...}">
+    <button onclick="submitKey()">Submit</button>
+
+    <p id="message" class="message"></p>
+    <div class="leaderboard-wrapper">
+     <a href="/leaderboard" class="leaderboard-btn">
+        🏅 Access Live Scoreboard
+     </a>
+    </div>
+    
+
+</div>
+</main>
+
+<footer class="main-footer">
+   <p>© 2026 CodingHub Ramadan Challenge</p>
+</footer>
+
+<audio id="successSound" src="{{ url_for('static', filename='success.mp3') }}"></audio>
+<audio id="failSound" src="{{ url_for('static', filename='fail.mp3') }}"></audio>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<div id="accessOverlay">
+  <h1>ACCESS GRANTED</h1>
+</div>
+</body>
+</html>

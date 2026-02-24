@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+
+<header class="main-header">🏅 Live Leaderboard</header>
+
+<div class="container">
+<table class="leaderboard">
+<tr>
+<th>Rank</th>
+<th>IP</th>
+<th>Points</th>
+<th>Time</th>
+</tr>
+
+{% for w in winners %}
+<tr>
+<td>
+{% if w.rank == 1 %}🥇
+{% elif w.rank == 2 %}🥈
+{% elif w.rank == 3 %}🥉
+{% endif %}
+#{{ w.rank }}
+</td>
+<td>{{ w.ip[:6] }}***</td>
+<td>{{ w.points }}</td>
+<td>{{ w.time }}</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+<script>
+setTimeout(()=>{ location.reload(); },10000);
+</script>
+
+</body>
+</html>
