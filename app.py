@@ -5,9 +5,14 @@ from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-
+import hashlib
 import os
-SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
+
+Salt_key= "525aeb0bd3c8c6e745aa47a19dd029ed"
+Hash="f9db9403c08ab439c5502dc5a208e34234fedf0dc5088614cd786da602bd8421"
+SECRET_KEY = "J4XHW-F3OQD-YD6KS"+Salt_key+Hash
 SECRET_HASH = hashlib.sha256(SECRET_KEY.encode()).hexdigest()
 
 WINNERS_FILE = "winners.json"
@@ -93,5 +98,5 @@ def submit():
 
 if __name__ == "__main__":
     import os
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
