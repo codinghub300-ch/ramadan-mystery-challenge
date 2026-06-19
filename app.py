@@ -57,11 +57,11 @@ def submit():
     if ip in block_map and now < block_map[ip]:
         return jsonify({"message": "Too many attempts. Try later."}), 403
 
-    if ip in rate_limit and now - rate_limit[ip] < 5:
-        return jsonify({"message": "Slow down."}), 429
+    # if ip in rate_limit and now - rate_limit[ip] < 5:
+    #     return jsonify({"message": "Slow down."}), 429
 
-    rate_limit[ip] = now
-    winners = load_winners()
+    # rate_limit[ip] = now
+    # winners = load_winners()
 
     if len(winners) >= 3:
         return jsonify({"message": "Lantern already claimed."})
