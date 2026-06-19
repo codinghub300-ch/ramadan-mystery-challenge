@@ -28,9 +28,9 @@ def save_winners(winners):
     with open(WINNERS_FILE, "w") as f:
         json.dump({"winners": winners}, f, indent=4)
 
-def log_attempt(data):
-    with open(LOG_FILE, "a") as f:
-        f.write(json.dumps(data) + "\n")
+# def log_attempt(data):
+#     with open(LOG_FILE, "a") as f:
+#         f.write(json.dumps(data) + "\n")
 
 @app.route("/")
 def index():
@@ -65,34 +65,57 @@ def submit():
         return jsonify({"message": "Lantern already claimed."})
 
     attempt_hash = hashlib.sha256(key.encode()).hexdigest()
-
+    
     if attempt_hash == SECRET_HASH:
-        rank = len(winners) + 1
+       rank = len(winners) + 1
         points = 60 if rank == 1 else 30 if rank == 2 else 15
 
-        # winner_data = {
-        #     "ip": ip,
-        #     "time": datetime.utcnow().isoformat(),
-        #     "rank": rank,
-        #     "points": points
-        # }
-
-        # winners.append(winner_data)
-        # save_winners(winners)
-
-        # log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "SUCCESS"})
-
-        # return jsonify({"success": True, "rank": rank, "points": points})
+       return jsonify({
+          "success": True,
+          "rank": rank,
+          "points": points
+       })
 
     else:
         fail_counter[ip] = fail_counter.get(ip, 0) + 1
 
-        if fail_counter[ip] >= 20:
-            block_map[ip] = now + (20 * 60)
+    if fail_counter[ip] >= 20:
+        block_map[ip] = now + (20 * 60)
 
-        log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "FAIL"})
+        return jsonify({
+            "success": False
+        })
+    
 
-        return jsonify({"success": False})
+    # if attempt_hash == SECRET_HASH:
+    #     rank = len(winners) + 1
+    #     points = 60 if rank == 1 else 30 if rank == 2 else 15
+
+    #     winner_data = {
+    #         "ip": ip,
+    #         "time": datetime.utcnow().isoformat(),
+    #         "rank": rank,
+    #         "points": points
+    #     }
+
+    #     winners.append(winner_data)
+    #     save_winners(winners)
+
+    #     log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "SUCCESS"})
+
+    #     return jsonify({"success": True, "rank": rank, "points": points})
+
+    # else:
+    #     fail_counter[ip] = fail_counter.get(ip, 0) + 1
+
+    #     if fail_counter[ip] >= 20:
+    #         block_map[ip] = now + (20 * 60)
+
+    #     log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "FAIL"})
+
+    #     return jsonify({"success": False})
+
+
 
 # if __name__ == "__main__":
 #     import os
