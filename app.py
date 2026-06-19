@@ -70,19 +70,19 @@ def submit():
         rank = len(winners) + 1
         points = 60 if rank == 1 else 30 if rank == 2 else 15
 
-        winner_data = {
-            "ip": ip,
-            "time": datetime.utcnow().isoformat(),
-            "rank": rank,
-            "points": points
-        }
+        # winner_data = {
+        #     "ip": ip,
+        #     "time": datetime.utcnow().isoformat(),
+        #     "rank": rank,
+        #     "points": points
+        # }
 
-        winners.append(winner_data)
-        save_winners(winners)
+        # winners.append(winner_data)
+        # save_winners(winners)
 
-        log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "SUCCESS"})
+        # log_attempt({"ip": ip, "time": datetime.utcnow().isoformat(), "status": "SUCCESS"})
 
-        return jsonify({"success": True, "rank": rank, "points": points})
+        # return jsonify({"success": True, "rank": rank, "points": points})
 
     else:
         fail_counter[ip] = fail_counter.get(ip, 0) + 1
