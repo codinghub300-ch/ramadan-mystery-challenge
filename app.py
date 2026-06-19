@@ -68,7 +68,7 @@ def submit():
     
     if attempt_hash == SECRET_HASH:
        rank = len(winners) + 1
-        points = 60 if rank == 1 else 30 if rank == 2 else 15
+       points = 60 if rank == 1 else 30 if rank == 2 else 15
 
        return jsonify({
           "success": True,
@@ -79,12 +79,12 @@ def submit():
     else:
         fail_counter[ip] = fail_counter.get(ip, 0) + 1
 
-    if fail_counter[ip] >= 20:
-        block_map[ip] = now + (20 * 60)
+        if fail_counter[ip] >= 20:
+           block_map[ip] = now + (20 * 60)
 
-        return jsonify({
-            "success": False
-        })
+           return jsonify({
+              "success": False
+           })
     
 
     # if attempt_hash == SECRET_HASH:
