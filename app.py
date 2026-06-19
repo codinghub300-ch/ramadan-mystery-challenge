@@ -8,8 +8,6 @@ app = Flask(__name__)
 import hashlib
 import os
 
-
-
 Salt_key= "525aeb0bd3c8c6e745aa47a19dd029ed"
 Hash="f9db9403c08ab439c5502dc5a208e34234fedf0dc5088614cd786da602bd8421"
 SECRET_KEY = "J4XHW-F3OQD-YD6KS"+Salt_key+Hash
@@ -61,7 +59,7 @@ def submit():
     #     return jsonify({"message": "Slow down."}), 429
 
     # rate_limit[ip] = now
-    # winners = load_winners()
+    winners = load_winners()
 
     if len(winners) >= 3:
         return jsonify({"message": "Lantern already claimed."})
