@@ -67,3 +67,5 @@ async function submitKey() {
         console.error(err);
         msg.style.color = "red";
         msg.innerText = "SERVER ERROR"
+    }
+}
